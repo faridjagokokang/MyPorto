@@ -1,0 +1,37 @@
+{
+  "name": "CyberNexus - Farid Donovant",
+  "short_name": "CyberNexus",
+  "description": "Portofolio interaktif Muhammad Farid Donovant. Jelajahi skill, project, dan rahasia di dalamnya.",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "background_color": "#000a00",
+  "theme_color": "#00ff00",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

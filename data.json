@@ -1,0 +1,23 @@
+{
+  "users": [
+    {
+      "username": "Novant",
+      "password": "123",
+      "createdAt": "2026-05-10T06:20:47.329Z"
+    }
+  ],
+  "articles": [
+    {
+      "id": "default-1",
+      "title": "Cara Menembus Firewall Tingkat Lanjut",
+      "author": "Unknown_Hacker",
+      "content": "Firewall generasi terbaru menggunakan AI untuk mendeteksi anomali paket data. Untuk melewatinya, kita perlu memanipulasi header TCP..."
+    },
+    {
+      "id": "default-2",
+      "title": "Keamanan Data di Era Web3",
+      "author": "Farid Donovant",
+      "content": "Desentralisasi membawa tantangan keamanan baru. Smart contract rentan terhadap eksploitasi jika tidak diaudit dengan benar..."
+    }
+  ]
+}

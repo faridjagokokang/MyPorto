@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Muhammad Farid Donovant</title>
+    <meta name="description"
+        content="Portofolio interaktif Muhammad Farid Donovant. Jelajahi skill, project, dan rahasia di dalamnya.">
+    <meta property="og:title" content="Profil Muhammad Farid Donovant">
+    <meta property="og:description"
+        content="Portofolio interaktif Muhammad Farid Donovant. Jelajahi skill, project, dan rahasia di dalamnya.">
+    <meta property="og:type" content="website">
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Muhammad Farid Donovant | Cyberpunk Portfolio">
+    <meta name="twitter:description"
+        content="Portofolio interaktif Muhammad Farid Donovant. Jelajahi skill, project, dan rahasia di dalamnya.">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000a00">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CyberNexus">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="css/Porto.css">
+</head>
+
+<body>
+    <div id="global-preloader">
+        <div class="preloader-content">
+            <div class="preloader-spinner"></div>
+            <p id="preloader-text">DECRYPTING ASSETS...</p>
+            <div class="preloader-bar">
+                <div id="preloader-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="boot-screen">
+        <div id="boot-text"></div>
+    </div>
+    <canvas id="matrix-rain"></canvas>
+    <div id="auth-container" class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2 id="auth-title">SYSTEM_LOGIN</h2>
+                <p class="auth-subtitle" id="auth-subtitle">ENTER CREDENTIALS TO CONTINUE...</p>
+            </div>
+            <form id="auth-form" class="contact-form-advanced">
+                <div class="form-group">
+                    <label for="auth-username">Username</label>
+                    <input type="text" id="auth-username" required placeholder="Masukkan username" class="auth-input">
+                </div>
+                <div class="form-group" id="auth-email-group" style="display: none;">
+                    <label for="auth-email">Email</label>
+                    <input type="email" id="auth-email" placeholder="Masukkan email" class="auth-input">
+                </div>
+                <div class="form-group">
+                    <label for="auth-password">Password</label>
+                    <input type="password" id="auth-password" required placeholder="Masukkan password"
+                        class="auth-input">
+                </div>
+                <button type="submit" id="auth-submit-btn" class="submit-btn auth-submit">EXECUTE_LOGIN</button>
+                <p id="auth-msg" class="error-text" style="text-align: center; margin-top: 15px; font-weight: 500;"></p>
+                <p style="text-align: center; margin-top: 25px; font-size: 0.95rem;">
+                    <a href="#" id="toggle-auth" class="auth-link">DON'T HAVE ACCOUNT? <span>CREATE_ACCOUNT</span></a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div id="main-app" style="display: none;">
+        <div class="container">
+            <header class="hero">
+                <div class="profile-hologram-wrapper">
+                    <img src="Farid.jpg" alt="Foto profil Farid" class="profile-photo">
+                    <canvas id="hologram-canvas" class="hologram-canvas"></canvas>
+                </div>
+                <nav class="nav"
+                    style="position: absolute; top: 16px; right: 16px; display: flex; gap: 10px; z-index: 10;">
+                    <button id="theme-btn" class="theme-btn">SWAP_THEME</button>
+                    <button id="nav-articles-btn" class="theme-btn">[ARTIKEL.CMS]</button>
+                    <button id="root-access-btn" class="theme-btn"
+                        style="color: var(--error-color); border-color: var(--error-color);">[!] TERMINAL</button>
+                    <button id="logout-btn" class="theme-btn">LOG_OUT</button>
+                </nav>
+                <div class="hero-text">
+                    <p id="greeting"></p>
+                    <h1>Muhammad Farid Donovant</h1>
+                    <p class="info">NIM 24EO10021 • Prodi Informatika
+                    </p>
+                    <p class="tagline">Mahasiswa Informatika dengan semangat teknologi, kreativitas, dan pengalaman
+                        belajar yang terus berkembang.</p>
+                </div>
+            </header>
+
+            <main>
+                <section class="card">
+                    <h2>Tentang Saya</h2>
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="about">[ABOUT.DAT]</button>
+                        <button class="tab-btn" data-tab="skills">[SKILLS.DAT]</button>
+                    </div>
+
+                    <div id="tab-about" class="tab-panel active">
+                        <p id="age-display"> dan tinggal di Kabupaten Cilacap, Kecamatan Kesugihan. Saat ini saya tengah
+                            menempuh pendidikan di Program Studi Informatika dan memiliki minat besar pada dunia
+                            teknologi serta programming.</p>
+                        <p id="typing-text"></p>
+                        <button id="btn-download-cv" class="submit-btn"
+                            style="margin-top: 20px;">[DOWNLOAD_RESUME.PDF]</button>
+                    </div>
+
+                    <div id="tab-skills" class="tab-panel">
+                        <p>Berikut adalah skill saya dalam bidang teknologi dan programming:</p>
+                        <ul>
+                            <li><strong>⚡ JavaScript</strong> - Kemampuan dasar hingga menengah</li>
+                            <li><strong>🌐 HTML & CSS</strong> - Pembuatan layout dan styling website</li>
+                            <li><strong>🧠 Problem Solving</strong> - Kemampuan analisis dan pemecahan masalah</li>
+                            <li><strong>🤝 Team Work</strong> - Kolaborasi dalam tim development</li>
+                        </ul>
+                    </div>
+
+        </div>
+        </section>
+
+        <section class="card" id="articles-section">
+            <h2>System Articles</h2>
+            <div class="contact-form-container">
+                <h2 id="formTitle">Tambah Artikel</h2>
+                <form id="articleForm" class="contact-form-advanced">
+                    <input type="hidden" id="articleId">
+
+                    <div class="form-group">
+                        <label for="title">Judul Artikel:</label>
+                        <input type="text" id="title" required minlength="3" placeholder="Masukkan judul...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="author">Penulis:</label>
+                        <input type="text" id="author" required placeholder="Nama penulis...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">Konten (Mendukung Markdown):</label>
+                        <textarea id="content" rows="4" required
+                            placeholder="Isi artikel... Anda bisa menggunakan Markdown!"></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <button type="submit" id="btnSubmit" class="submit-btn">SIMPAN.EXE</button>
+                        <button type="button" id="btnCancel" class="submit-btn"
+                            style="display: none; color: var(--error-color); border-color: var(--error-color);">ABORT</button>
+                    </div>
+                </form>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h2>Daftar Artikel</h2>
+                <div id="articleList"></div>
+            </div>
+
+            <div style="margin-top: 40px; border-top: 1px dashed var(--accent-color); padding-top: 20px;">
+                <h2>Analytics & Leaderboard (Admin Only)</h2>
+                <button id="btn-load-dashboard" class="submit-btn" style="margin-bottom: 15px;">MUAT_DASHBOARD</button>
+                <div id="dashboard-container" style="display:none;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <h3>📈 Site Analytics</h3>
+                            <ul id="analytics-list" style="list-style: none; padding: 0;"></ul>
+                        </div>
+                        <div>
+                            <h3>🏆 CTF Leaderboard</h3>
+                            <ol id="leaderboard-list"></ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card grid-2">
+            <div>
+                <h2>Hobi Saya</h2>
+                <ul>
+                    <li>Ngoding</li>
+                    <li>Main game</li>
+                    <li>Membaca di semua platform</li>
+                    <li>Olahraga: renang, minisoccer, basket</li>
+                </ul>
+            </div>
+            <div>
+                <h2>Tujuan Utama</h2>
+                <ol>
+                    <li>Menjadi Software Engineer &amp; Hardware Engineer</li>
+                    <li>Membangun startup sendiri</li>
+                    <li>Bekerja di perusahaan teknologi besar</li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Hal Favorit Saya</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Kategori</th>
+                        <th>Favorit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Makanan</td>
+                        <td>Udang Saus Padang</td>
+                    </tr>
+                    <tr>
+                        <td>Warna</td>
+                        <td>Hitam</td>
+                    </tr>
+                    <tr>
+                        <td>Film</td>
+                        <td>Horor</td>
+                    </tr>
+                    <tr>
+                        <td>Buku</td>
+                        <td>Atomic Habits</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- INTERACTIVE LOCATION MAP -->
+        <section class="card map-card">
+            <h2>Target Location</h2>
+            <div id="map"></div>
+            <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-secondary); text-align: center;">
+                SECURE_COORDINATES: LAT -7.6186, LNG 109.0834 | TARGET_AREA: KEC. KESUGIHAN, KAB. CILACAP
+            </p>
+        </section>
+
+        <!-- SERVICE WORKER & NOTIFICATION CONTROL PANEL -->
+        <section class="card">
+            <h2>Service Worker & Push Alerts</h2>
+            <div class="sw-grid">
+                <div class="sw-panel-column">
+                    <h3
+                        style="color: var(--accent-color); font-size: 1.05rem; margin-bottom: 15px; border-bottom: 1px dashed var(--text-secondary); padding-bottom: 5px; font-family: 'Fira Code', monospace;">
+                        SW_STATUS_MONITOR</h3>
+                    <ul class="sw-status-list">
+                        <li>
+                            <span>SERVICE_WORKER:</span>
+                            <span id="sw-status-val">CHECKING...</span>
+                        </li>
+                        <li>
+                            <span>OFFLINE_CACHE:</span>
+                            <span style="color: var(--text-primary);">READY (HTML/CSS/JS)</span>
+                        </li>
+                    </ul>
+                    <div class="sw-actions">
+                        <button id="btn-register-sw" class="submit-btn sw-btn">REGISTER_SW</button>
+                        <button id="btn-unregister-sw" class="submit-btn sw-btn"
+                            style="color: var(--error-color); border-color: var(--error-color); display: none;">UNREGISTER_SW</button>
+                    </div>
+                </div>
+                <div class="sw-panel-column">
+                    <h3
+                        style="color: var(--accent-color); font-size: 1.05rem; margin-bottom: 15px; border-bottom: 1px dashed var(--text-secondary); padding-bottom: 5px; font-family: 'Fira Code', monospace;">
+                        PUSH_BROADCAST_HUB</h3>
+                    <ul class="sw-status-list">
+                        <li>
+                            <span>NOTIFY_PERMISSION:</span>
+                            <span id="notify-status-val">CHECKING...</span>
+                        </li>
+                        <li>
+                            <span>PUSH_SERVICE:</span>
+                            <span style="color: var(--text-primary);">ONLINE_SIMULATED</span>
+                        </li>
+                    </ul>
+                    <div class="sw-actions">
+                        <button id="btn-request-notify" class="submit-btn sw-btn">REQUEST_PERMISSION</button>
+                        <button id="btn-test-notify" class="submit-btn sw-btn"
+                            style="display: none;">SEND_TEST_NOTIFICATION</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Skill Saya</h2>
+
+            <div class="skill-item" data-level="85">
+                <p>⚡ JavaScript</p>
+                <div class="skill-bar">
+                    <div class="skill-fill"></div>
+                </div>
+            </div>
+
+            <div class="skill-item" data-level="90">
+                <p>🌐 HTML & CSS</p>
+                <div class="skill-bar">
+                    <div class="skill-fill"></div>
+                </div>
+            </div>
+            <div class="skill-item" data-level="80">
+                <p>🧠 Problem Solving</p>
+                <div class="skill-bar">
+                    <div class="skill-fill"></div>
+                </div>
+            </div>
+            <div class="skill-item" data-level="85">
+                <p>🤝 Team Work</p>
+                <div class="skill-bar">
+                    <div class="skill-fill"></div>
+                </div>
+            </div>
+        </section>
+        <section class="card">
+            <h2>Projects</h2>
+
+            <div id="admin-project-form-container" class="contact-form-container" style="display:none; margin-bottom: 20px;">
+                <h2 id="projectFormTitle">Tambah Project</h2>
+                <form id="projectForm" class="contact-form-advanced">
+                    <input type="hidden" id="projectId">
+                    
+                    <div class="form-group">
+                        <label for="projectTitle">Nama Project:</label>
+                        <input type="text" id="projectTitle" required placeholder="Masukkan nama project...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectDesc">Deskripsi:</label>
+                        <textarea id="projectDesc" rows="3" required placeholder="Deskripsi project..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectLink">Link Web (Vercel/dll):</label>
+                        <input type="url" id="projectLink" placeholder="https://...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectGit">Link Source Code (GitHub/dll):</label>
+                        <input type="url" id="projectGit" placeholder="https://github.com/...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectThumbnail">Link Thumbnail (URL Gambar):</label>
+                        <input type="url" id="projectThumbnail" placeholder="https://...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectTech">Tech Stack:</label>
+                        <input type="text" id="projectTech" placeholder="HTML, CSS, JS...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectCategory">Kategori:</label>
+                        <select id="projectCategory" style="width:100%; padding: 10px; background: rgba(0,0,0,0.5); border: 1px solid var(--accent-color); color: var(--text-primary); border-radius: 4px;">
+                            <option value="web">Web</option>
+                            <option value="app">App</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <button type="submit" id="btnProjectSubmit" class="submit-btn">SIMPAN.EXE</button>
+                        <button type="button" id="btnProjectCancel" class="submit-btn" style="display: none; color: var(--error-color); border-color: var(--error-color);">ABORT</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="app">App</button>
+            </div>
+
+            <div class="projects">
+                <div class="project-card" data-category="web">Website Portfolio</div>
+                <div class="project-card" data-category="app">Mobile App</div>
+            </div>
+        </section>
+        <section class="card contact-card">
+            <div class="contact-wrapper">
+                <div class="contact-form-container">
+                    <h2>Hubungi Saya</h2>
+                    <p class="contact-note">Isi formulir di bawah ini dan saya akan menghubungi Anda dalam waktu kurang
+                        dari 24 jam</p>
+
+                    <form id="contact-form" class="contact-form-advanced">
+
+                        <div class="form-group">
+                            <label for="full-name">Nama Lengkap</label>
+                            <input type="text" id="full-name" name="name" placeholder="Contoh: John Doe" required>
+                            <span id="err-name" class="error-text"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email-field">Email</label>
+                            <input type="email" id="email-field" name="email" placeholder="Contoh: johndoe@edot.id"
+                                required>
+                            <span id="err-email" class="error-text"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Nomor Telepon</label>
+                            <div class="phone-input-wrapper">
+                                <select class="country-code" name="country_code">
+                                    <option value="+62">🇮🇩 +62</option>
+                                    <option value="+1">🇺🇸 +1</option>
+                                    <option value="+44">🇬🇧 +44</option>
+                                    <option value="+86">🇨🇳 +86</option>
+                                </select>
+                                <input type="tel" id="phone" name="phone" placeholder="Contoh: 8123456789" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="questions">Pertanyaan Anda</label>
+                            <textarea id="questions" name="questions" rows="5"
+                                placeholder="Masukkan pertanyaan atau pesan Anda di sini... Pesan akan masuk ke WhatsApp saya..."
+                                maxlength="500"></textarea>
+                            <span id="err-questions" class="error-text"></span>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Kirim</button>
+                    </form>
+                    <p id="form-success" class="success-text"></p>
+                </div>
+
+                <div class="contact-info-container">
+                    <h3>Hubungi Saya Langsung</h3>
+                    <div class="contact-info-grid">
+                        <div class="info-item">
+                            <div class="info-icon">📧</div>
+                            <div class="info-content">
+                                <p class="info-label">Email</p>
+                                <a href="mailto:ridd2all.done@gmail.com">Farid</a>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">💬</div>
+                            <div class="info-content">
+                                <p class="info-label">WhatsApp</p>
+                                <a href="https://wa.me/6287755466436" target="_blank" rel="noreferrer">+62 877 5546
+                                    6436</a>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">📱</div>
+                            <div class="info-content">
+                                <p class="info-label">Instagram</p>
+                                <a href="https://www.instagram.com/el_novant/" target="_blank"
+                                    rel="noreferrer">@el_novant</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </main>
+
+        <footer class="footer">
+            <p>Copyright &copy; 2024 Muhammad Farid Donovant</p>
+            <div id="secret-code"
+                style="opacity:0.05; pointer-events:none; text-align:center; font-size: 0.7rem; margin-top: 10px;">
+                SEC_CODE: OMEGA-77</div>
+            <div id="defuse-code"
+                style="opacity:0.02; pointer-events:none; text-align:center; font-size: 0.6rem; margin-top: 5px;">
+                DEFUSE: 7355608</div>
+        </footer>
+    </div>
+    </div>
+    </div>
+
+    <div id="cyber-cursor"></div>
+    <div id="cursor-trail-container"></div>
+
+    <div id="cyber-chat" class="hidden">
+        <div class="chat-header"><span>UNKNOWN_CONNECTION</span><button id="close-chat">[X]</button></div>
+        <div id="chat-messages"></div>
+        <div class="chat-input-line"><span>></span><input type="text" id="chat-input" disabled
+                placeholder="Connection locked..."></div>
+    </div>
+
+    <div id="hacker-typer" class="hidden">
+        <div class="typer-header">TARGET: MAINFRAME_UPLINK <span>[PROGRESS: <span id="typer-progress">0</span>%]</span>
+        </div>
+        <div id="typer-code"></div>
+        <div id="typer-granted" class="hidden">ACCESS GRANTED</div>
+    </div>
+
+    <div id="self-destruct-overlay" class="hidden">
+        <div class="sd-warning">WARNING</div>
+        <div class="sd-text">SYSTEM PURGE INITIATED</div>
+        <div id="sd-timer">60.00</div>
+        <div class="sd-sub">ENTER DEFUSE CODE IN TERMINAL</div>
+    </div>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal-wrapper hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2 id="modal-title">PROJECT_NAME</h2>
+                <button id="modal-close">[X]</button>
+            </div>
+            <div class="modal-content">
+                <div class="modal-image-placeholder">IMG_NOT_FOUND</div>
+                <p id="modal-desc" class="modal-desc">Loading description...</p>
+                <div class="modal-tech">
+                    <strong>TECH_STACK:</strong> <span id="modal-tech-list"></span>
+                </div>
+                <div class="modal-links">
+                    <a href="#" id="modal-link-demo" class="submit-btn" target="_blank">[LIVE_DEMO]</a>
+                    <a href="#" id="modal-link-git" class="submit-btn" target="_blank">[SOURCE_CODE]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/Porto.js"></script>
+    <script src="js/matrix.js"></script>
+    <script src="js/boot.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/tampilan.js"></script>
+    <script src="js/terminal.js"></script>
+    <!-- Leaflet JS & Service Worker script -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="js/map-sw.js"></script>
+</body>
+
+</html>

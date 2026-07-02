@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/entrypoint.go"
+    },
+    {
+      "source": "/ws/(.*)",
+      "destination": "/api/entrypoint.go"
+    }
+  ]
+}
